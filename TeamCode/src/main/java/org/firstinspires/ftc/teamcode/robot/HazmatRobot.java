@@ -6,6 +6,8 @@ import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.data.Alliance;
+import org.firstinspires.ftc.teamcode.mechanisms.Launcher;
+import org.firstinspires.ftc.teamcode.mechanisms.Vision;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 import java.util.Set;
@@ -16,6 +18,9 @@ import dev.nextftc.robot.NextRobot;
 public class HazmatRobot implements NextRobot {
     private final Follower follower;
     private Alliance alliance;
+
+    private Vision vision;
+    private Launcher launcher;
     public HazmatRobot(HardwareMap h, Alliance alliance){
         follower = Constants.create(h);
     }
@@ -38,6 +43,14 @@ public class HazmatRobot implements NextRobot {
     @NonNull
     @Override
     public Set<Mechanism> getMechanisms() {
-        return Set.of();
+        return Set.of(vision, launcher);
+    }
+
+    public Vision getVision() {
+        return vision;
+    }
+
+    public Launcher getLauncher() {
+        return launcher;
     }
 }
