@@ -1,11 +1,16 @@
 package org.firstinspires.ftc.teamcode.robot;
 
+import androidx.annotation.NonNull;
+
 import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.data.Alliance;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
+import java.util.Set;
+
+import dev.nextftc.robot.Mechanism;
 import dev.nextftc.robot.NextRobot;
 
 public class HazmatRobot implements NextRobot {
@@ -28,5 +33,11 @@ public class HazmatRobot implements NextRobot {
             return follower;
         }
         return null;
+    }
+
+    @NonNull
+    @Override
+    public Set<Mechanism> getMechanisms() {
+        return Set.of();
     }
 }

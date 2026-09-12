@@ -31,6 +31,6 @@ public class Tuning {
 
     @Tuner
     public static Procedure tests() {
-        return new Tests(hardwareMap -> new Mecanum(hardwareMap, Constants.drivetrainConfig), (hardwareMap -> new OctoQuadLocalizer(hardwareMap, Constants.octoQuadConfig)), () -> new Foresight(Constants.fore));
+        return new Tests(hardwareMap -> new Mecanum(hardwareMap, Constants.driveConfig), (hardwareMap -> new OctoQuadLocalizer(hardwareMap, Constants.octoQuadConfig)), () -> new Foresight(Constants.foresightConfig));
     }
 }
