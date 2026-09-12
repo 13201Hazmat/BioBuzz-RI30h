@@ -1,3 +1,21 @@
+// build.gradle in TeamCode
+//
+// Most of the definitions for building your module reside in a common, shared
+// file 'build.common.gradle'. Being factored in this way makes it easier to
+// integrate updates to the FTC into your code. If you really need to customize
+// the build definitions, you can place those customizations in this file, but
+// please think carefully as to whether such customizations are really necessary
+// before doing so.
+
+
+// Custom definitions may go here
+
+// Include common definitions from above.
+apply from: '../build.common.gradle'
+apply from: '../build.dependencies.gradle'
+apply plugin: 'com.android.application'
+apply plugin: 'dev.frozenmilk.sinister.sloth.load'
+
 buildscript {
     repositories {
         google()
@@ -11,24 +29,46 @@ buildscript {
     }
 }
 
-apply plugin: 'com.android.application'
-apply plugin: 'dev.frozenmilk.sinister.sloth.load'
+android {
+    namespace = 'org.firstinspires.ftc.teamcode'
 
-//
-// build.gradle in TeamCode
-//
-// Most of the definitions for building your module reside in a common, shared
-// file 'build.common.gradle'. Being factored in this way makes it easier to
-// integrate updates to the FTC into your code. If you really need to customize
-// the build definitions, you can place those customizations in this file, but
-// please think carefully as to whether such customizations are really necessary
-// before doing so.
+    packagingOptions {
+        jniLibs.useLegacyPackaging true
+    }
+}
+repositories {
+    maven {
+        url = "https://repo.dairy.foundation/releases"
+    }
+    maven {
+        url = "https://repo.dairy.foundation/snapshots"
+    }
+}
 
-// Custom definitions may go here
+dependencies {
+    implementation project(':FtcRobotController')
+}
 
-// Include common definitions from above.
-apply from: '../build.common.gradle'
-apply from: '../build.dependencies.gradle'
+configurations.all {
+    resolutionStrategy {
+        cacheChangingModulesFor 0, 'seconds'
+    }
+}
+
+
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url "https://repo.dairy.foundation/releases"
+        }
+    }
+    dependencies {
+        classpath "dev.frozenmilk:Load:0.3.0"
+    }
+}
 
 android {
     namespace = 'org.firstinspires.ftc.teamcode'
@@ -37,7 +77,22 @@ android {
         jniLibs.useLegacyPackaging true
     }
 }
+repositories {
+    maven {
+        url = "https://repo.dairy.foundation/releases"
+    }
+    maven {
+        url = "https://repo.dairy.foundation/snapshots"
+    }
+}
 
 dependencies {
     implementation project(':FtcRobotController')
 }
+
+configurations.all {
+    resolutionStrategy {
+        cacheChangingModulesFor 0, 'seconds'
+    }
+}
+
