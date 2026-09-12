@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmodes.auto.commands;
 
-import static com.pedropathing.ivy.pedro.PedroCommands.follow;
+import static com.pedropathing.ivy.commands.Commands.instant;
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.ivy.CommandBuilder;
@@ -17,6 +17,6 @@ public class AutoCommands {
         this.paths = paths;
     }
     public CommandBuilder runPath(Path path){
-        return follow(follower, path);
+        return instant(() -> follower.follow(path));
     }
 }
