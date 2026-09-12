@@ -43,7 +43,7 @@ public class HazmatRobot implements NextRobot {
     @NonNull
     @Override
     public Set<Mechanism> getMechanisms() {
-        return Set.of(vision, launcher);
+        return Set.of(launcher);
     }
 
     public Vision getVision() {

@@ -13,7 +13,6 @@ public class Intake implements Mechanism {
      * Intake constructor.
      */
     public Intake(){}
-
     enum IntakeState {
         ON(1),
         OFF(0),
@@ -24,10 +23,6 @@ public class Intake implements Mechanism {
             this.power = power;
         }
 
-        /**
-         * A getter for intake motor power.
-         * @return intake motor power
-         */
         public int getPower(){
             return power;
         }
