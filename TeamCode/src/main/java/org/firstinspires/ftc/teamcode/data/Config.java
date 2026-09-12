@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.data;
 
 public class Config {
     //Control Hub
-    public static int x = 0;
+    public static int intakeMotor = 0;
     public static int b = 1;
     public static int c = 2;
     public static int d = 3;
