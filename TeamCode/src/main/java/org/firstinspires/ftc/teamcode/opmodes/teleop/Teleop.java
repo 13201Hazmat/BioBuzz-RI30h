@@ -20,6 +20,8 @@ public class Teleop extends NextOpMode {
     public Teleop(HazmatRobot hazmatRobot) {
         super(hazmatRobot);
         this.hazmatRobot = hazmatRobot;
+
+        Scheduler.reset();
     }
 
     @Override
@@ -36,11 +38,11 @@ public class Teleop extends NextOpMode {
         gp1.rightBumper().onTrue(hazmatRobot.launch());
 
         gp1.cross().onTrue(instant(() -> hazmatRobot.getLauncher().getLauncherMotor().setThrottle(1)));
-//        gp2.dpadUp().onTrue(hazmatRobot.getLauncher().incrementPower());
-//        gp2.dpadDown().onTrue(hazmatRobot.getLauncher().decrementPower());
-//
-//        gp2.circle().onTrue(hazmatRobot.getTransfer().open());
-//        gp2.square().onTrue(hazmatRobot.getTransfer().close());
+        gp2.dpadUp().onTrue(hazmatRobot.getLauncher().incrementPower());
+        gp2.dpadDown().onTrue(hazmatRobot.getLauncher().decrementPower());
+
+        gp2.circle().onTrue(hazmatRobot.getTransfer().open());
+        gp2.square().onTrue(hazmatRobot.getTransfer().close());
 
     }
 

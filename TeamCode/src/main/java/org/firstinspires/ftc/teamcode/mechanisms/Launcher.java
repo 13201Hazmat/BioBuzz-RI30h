@@ -24,7 +24,11 @@ public class Launcher implements Mechanism {
     private double currentVelocity = 0.0;
     private double targetVelocity = 0.0;
 
-    public Launcher(){}
+    public Launcher(){
+        launcherMotor.getVelocityConstants().setKV(kV);
+        launcherMotor.getVelocityConstants().setKV(kS);
+
+    }
 
     public NextMotor getLauncherMotor(){
         return launcherMotor;
