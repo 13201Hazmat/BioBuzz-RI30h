@@ -15,11 +15,11 @@ public class Launcher implements Mechanism {
     private final NextMotor launcherMotor = new NextMotor("l");
     private final NextServo launcherServo = new NextServo(RobotController.controlHub(),Config.launcherServo,0);
 
-    private final double TOLERANCE = 5000;
+    private final double TOLERANCE = 25;
     private final double DELTA = 50.0;
-    private final double POINT1 = 67;
+    private final double POINT1 = 16000;
 
-    private final double POLLEN = 0.58;
+    private final double POLLEN = 0.59;
     private final double NECTAR = 0.5;
 
     public double kV = 0.0000571;

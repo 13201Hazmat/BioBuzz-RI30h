@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.mechanisms;
 
+import com.pedropathing.ivy.Command;
 import com.pedropathing.math.Pose;
 import com.pedropathing.math.Vector;
 import com.qualcomm.hardware.limelightvision.LLResult;
@@ -11,6 +12,8 @@ import org.firstinspires.ftc.teamcode.data.BallType;
 import java.util.ArrayList;
 import java.util.List;
 
+import dev.nextftc.hardware.RobotController;
+import dev.nextftc.hardware.actuators.NextServo;
 import dev.nextftc.hardware.webcams.NextLimelight;
 import dev.nextftc.robot.Mechanism;
 
@@ -33,7 +36,6 @@ public class Vision implements Mechanism {
     public Command setIntakePos(){
         return instant(()->setPosition(INTAKE_POS));
     }
-
     public Command setBucketPos(){
         return instant(()->setPosition(BUCKET_POS));
     }
