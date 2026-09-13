@@ -14,13 +14,15 @@ import dev.nextftc.hardware.sensors.colors.NextColor;
 import dev.nextftc.robot.Mechanism;
 
 public class Transfer implements Mechanism {
-    public Transfer(){}
+    public Transfer(){
+        setPosition(CLOSE_POS);
+    }
 
     private final double OPEN_POS = 0.0;
     private final double MID_POS = OPEN_POS / 2;
     private final double CLOSE_POS = 1.0;
 
-    private NextServo rampServo = new NextServo(RobotController.controlHub(), Config.rampServo,0);
+    private NextServo rampServo = new NextServo(RobotController.controlHub(), Config.rampServo);
 
     public NextServo getRampServo() {
         return rampServo;

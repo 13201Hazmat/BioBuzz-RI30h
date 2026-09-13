@@ -17,8 +17,8 @@ public class Launcher implements Mechanism {
     private final double DELTA = 50.0;
     private final double POINT1 = 0.0;
 
-    public double kV = 0;
-    public double kS = 0;
+    public double kV = 0.0000688;
+    public double kS = 0.465;
 
     private double curPower = 0.5;
     private double currentVelocity = 0.0;

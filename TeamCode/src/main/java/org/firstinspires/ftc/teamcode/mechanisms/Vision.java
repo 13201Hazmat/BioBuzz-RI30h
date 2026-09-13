@@ -1,19 +1,37 @@
-/*
 package org.firstinspires.ftc.teamcode.mechanisms;
 
 import com.pedropathing.ivy.Command;
 import com.pedropathing.math.Pose;
 import com.pedropathing.math.Vector;
 
+import dev.nextftc.hardware.RobotController;
+import dev.nextftc.hardware.actuators.NextServo;
 import dev.nextftc.hardware.webcams.NextLimelight;
 import dev.nextftc.robot.Mechanism;
 
 public class Vision implements Mechanism {
     private final NextLimelight limelight = new NextLimelight("Limelight");
+    private final NextServo limelightServo = new NextServo(RobotController.expansionHub(), 0);
+
+    private final double INTAKE_POS = 0.0;
+    private final double BUCKET_POS = 0.7;
+
 
     public Vision() {
+        setPosition(INTAKE_POS);
     }
 
+    private void setPosition(double x){
+        limelightServo.setPosition(x);
+    }
+
+    public Command setIntakePos(){
+        return instant(()->setPosition(INTAKE_POS));
+    }
+
+    public Command setBucketPos(){
+        return instant(()->setPosition(BUCKET_POS));
+    }
     public void start() {
         limelight.startReading(2, 100);
     }
@@ -76,4 +94,4 @@ public class Vision implements Mechanism {
     public Pose getFinalPose(Pose currentPose) {
         return getFinalPose(limelight.getTX(), limelight.getTY(), currentPose);
     }
-}*/
+}

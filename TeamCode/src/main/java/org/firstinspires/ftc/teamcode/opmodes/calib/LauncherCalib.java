@@ -1,7 +1,10 @@
 package org.firstinspires.ftc.teamcode.opmodes.calib;
 
 
+import static com.pedropathing.ivy.Scheduler.schedule;
 import static com.pedropathing.ivy.commands.Commands.instant;
+
+import static dev.nextftc.units.Units.RotationsPerMinute;
 
 import org.firstinspires.ftc.teamcode.robot.HazmatRobot;
 
@@ -18,14 +21,20 @@ public class LauncherCalib extends NextOpMode {
         super(robot);
         this.robot = robot;
         Trigger.Companion.getDefaultEventLoop().clear();
-        CommandGamepad gp1 = new CommandGamepad(gamepad1);
 
-        gp1.rightBumper().onTrue(instant(() -> robot.getLauncher().getLauncherMotor().setThrottle(0.5)));
 
     }
+    @Override
+    public void start(){
+        schedule(instant(() -> {
+            robot.getLauncher().getLauncherMotor().setThrottle(1.0);
+        }));
+    }
+
 
     @Override
     public void periodic() {
+        telemetry.addData("Velo (RPM)", robot.getLauncher().getLauncherMotor().getEncoderVelocity().into(RotationsPerMinute));
         telemetry.update();
     }
 }

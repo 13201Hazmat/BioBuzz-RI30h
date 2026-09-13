@@ -17,9 +17,9 @@ public class Lift implements Mechanism {
     private static final double kP = 0.005;
     private static final double kD = 0;
 
-    private static final double LAUNCH_TICKS = 135;
+    private static final double LAUNCH_TICKS = 200;
     private static final double LOW_TICKS = 1000;
-    private static final double HOME_TICKS = 0;
+    private static final double HOME_TICKS = 100;
 
     private static final double TICKS_PER_ROTATION = 384.5; //435 motor
 
@@ -42,6 +42,8 @@ public class Lift implements Mechanism {
 
         r.getPositionConstants().setKP(kP);
         r.getPositionConstants().setKD(kD);
+
+        setPosition(LiftState.HOME);
     }
 
     private void setPos(double goalTicks) {

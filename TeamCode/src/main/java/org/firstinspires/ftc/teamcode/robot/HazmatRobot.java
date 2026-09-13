@@ -99,6 +99,7 @@ public class HazmatRobot implements NextRobot {
             transfer.open(),
             waitMs(2000),
             transfer.close(),
+            lift.setPosition(Lift.LiftState.HOME),
             launcher.stopLauncher(),
             intake.setSpeed(Intake.IntakeState.FORWARD)
         );

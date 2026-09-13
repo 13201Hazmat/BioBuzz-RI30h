@@ -15,8 +15,8 @@ import dev.nextftc.robot.triggers.Trigger;
 
 @NextTeleop(name = "Launcher PIDFF")
 public class LauncherPID extends NextOpMode {
-    public static double targetVelocity = 1000;
-    public static double kS = 0.02;
+    public static double targetVelocity = 10000 ;
+    public static double kS = 0;
     private final HazmatRobot robot;
     public LauncherPID(HazmatRobot robot) {
         super(robot);
@@ -40,8 +40,7 @@ public class LauncherPID extends NextOpMode {
 
         // Update PID / FF constants
 
-        robot.getLauncher().kS = kS;
-
+        robot.getLauncher().getLauncherMotor().getVelocityConstants().setKS(kS);
         // Telemetry
         telemetry.addData("Target Velocity", targetVelocity);
         telemetry.addData("Measured Velocity", robot.getLauncher().getLauncherMotor().getEncoderVelocity().into(RotationsPerMinute));
