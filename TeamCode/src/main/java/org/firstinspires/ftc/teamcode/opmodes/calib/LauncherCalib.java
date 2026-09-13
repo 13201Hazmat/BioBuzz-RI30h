@@ -21,7 +21,7 @@ public class LauncherCalib extends NextOpMode {
         Trigger.Companion.getDefaultEventLoop().clear();
         CommandGamepad gp1 = new CommandGamepad(gamepad1);
 
-        gp1.rightBumper().onTrue(instant(() -> robot.getLauncher().setTargetVelocity(2000)));
+//        gp1.rightBumper().onTrue(instant(() -> robot.getLauncher().setTargetVelocity(2000)));
 
     }
 

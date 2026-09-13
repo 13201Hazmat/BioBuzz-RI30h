@@ -24,28 +24,28 @@ public class Launcher implements Mechanism {
     private final NextServo compressionServo = new NextServo(RobotController.controlHub(), 1);
     private final NextServo launcherGateServo = new NextServo(RobotController.controlHub(), 1);
     private final NextColorDistanceSensor launcherGateColorSensor = new NextColorDistanceSensor(RobotController.controlHub(), 1);
-    private final int KP = 0;
-    private final int KI = 0;
-    private final int KD = 0;
-    private final int TOLERANCE = 50;
+//    private final int KP = 0;
+//    private final int KI = 0;
+//    private final int KD = 0;
+//    private final int TOLERANCE = 50;
     private final int POLLEN_COMPRESS_POS = 0;
     private final int NECTAR_COMPRESS_POS = 0;
-    private AngularVelocity currentVelocity;
-    private AngularVelocity targetVelocity;
-    private final PIDController pid = new PIDController(new PIDCoefficients(KP, KI, KD));
+//    private AngularVelocity currentVelocity;
+//    private AngularVelocity targetVelocity;
+//    private final PIDController pid = new PIDController(new PIDCoefficients(KP, KI, KD));
 
     public Launcher(){}
 
     // USE THIS METHOD FOR LAUNCHER
-    public void setTargetVelocity(double targetVelocity){
-        this.targetVelocity = RotationsPerSecond.of(targetVelocity);
-    }
-
-    private void spinToVelocity(double velocity) {
-        double error = velocity - currentVelocity.getMagnitude();
-        targetVelocity = RotationsPerSecond.of(pid.calculate(error));
-        launcherMotor.setVelocitySetpoint(targetVelocity);
-    }
+//    public void setTargetVelocity(double targetVelocity){
+//        this.targetVelocity = RotationsPerSecond.of(targetVelocity);
+//    }
+//
+//    private void spinToVelocity(double velocity) {
+//        double error = velocity - currentVelocity.getMagnitude();
+//        targetVelocity = RotationsPerSecond.of(pid.calculate(error));
+//        launcherMotor.setVelocitySetpoint(targetVelocity);
+//    }
 
     @Deprecated
     public Command setPowerThingy() {
@@ -76,9 +76,9 @@ public class Launcher implements Mechanism {
         return launcherMotor.getThrottle();
     }
 
-    public boolean isAtVelocity(){
-        return Math.abs(currentVelocity.getMagnitude() - targetVelocity.getMagnitude()) <= TOLERANCE;
-    }
+//    public boolean isAtVelocity(){
+//        return Math.abs(currentVelocity.getMagnitude() - targetVelocity.getMagnitude()) <= TOLERANCE;
+//    }
 
     public void pollenCompress(){
         compressionServo.setPosition(POLLEN_COMPRESS_POS);
@@ -92,11 +92,11 @@ public class Launcher implements Mechanism {
 //
 //    }
 
-    @Override
-    public void periodic() {
-        currentVelocity = launcherMotor.getEncoderVelocity();
-        spinToVelocity(targetVelocity.getMagnitude());
-    }
+//    @Override
+//    public void periodic() {
+//        currentVelocity = launcherMotor.getEncoderVelocity();
+//        spinToVelocity(targetVelocity.getMagnitude());
+//    }
 
 
 }
