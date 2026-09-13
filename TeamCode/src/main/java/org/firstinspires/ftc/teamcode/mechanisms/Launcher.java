@@ -1,28 +1,19 @@
 package org.firstinspires.ftc.teamcode.mechanisms;
 
-import static dev.nextftc.units.Units.RotationsPerSecond;
-
 import com.pedropathing.ivy.Command;
 
-import org.firstinspires.ftc.teamcode.data.BallType;
+import org.firstinspires.ftc.teamcode.data.Config;
 
-import dev.nextftc.control.feedback.PIDCoefficients;
-import dev.nextftc.control.feedback.PIDController;
 import dev.nextftc.hardware.RobotController;
 import dev.nextftc.hardware.actuators.NextMotor;
-import dev.nextftc.hardware.actuators.NextServo;
 import dev.nextftc.hardware.sensors.NextColorDistanceSensor;
-import dev.nextftc.hardware.sensors.colors.ColorProfile;
-import dev.nextftc.hardware.sensors.colors.ColorSpace;
-import dev.nextftc.hardware.sensors.colors.NextColor;
 import dev.nextftc.robot.Mechanism;
-import dev.nextftc.units.measuretypes.AngularVelocity;
 
 public class Launcher implements Mechanism {
     // TODO UPDATE PORT AND ROBOTCONTROLLER
-    private final NextMotor launcherMotor = new NextMotor(RobotController.controlHub(), 1);
-    private final NextServo compressionServo = new NextServo(RobotController.controlHub(), 1);
-    private final NextServo launcherGateServo = new NextServo(RobotController.controlHub(), 1);
+    private final NextMotor launcherMotor = new NextMotor(RobotController.expansionHub(), Config.launcherMotor);
+//    private final NextServo compressionServo = new NextServo(RobotController.controlHub(), 1);
+//    private final NextServo launcherGateServo = new NextServo(RobotController.controlHub(), 1);
     private final NextColorDistanceSensor launcherGateColorSensor = new NextColorDistanceSensor(RobotController.controlHub(), 1);
 //    private final int KP = 0;
 //    private final int KI = 0;
@@ -48,7 +39,6 @@ public class Launcher implements Mechanism {
 //        launcherMotor.setVelocitySetpoint(targetVelocity);
 //    }
 
-    @Deprecated
     public Command setPowerThingy() {
         currVel = 0.5;
         return instant(() -> launcherMotor.setThrottle(0.5));
@@ -64,13 +54,13 @@ public class Launcher implements Mechanism {
         return instant(() -> launcherMotor.setThrottle(currVel - 0.01));
     }
 
-    public Command incrementLauncherGate() {
+   /* public Command incrementLauncherGate() {
         double next = 0.01;
         double curr = launcherGateServo.getPosition();
         return instant(() -> launcherGateServo.setPosition(next + curr));
-    }
+    }*/
 
-    public Command decrementLauncherGate() {
+    /*public Command decrementLauncherGate() {
         double next = 0.01;
         double curr = launcherGateServo.getPosition();
         return instant(() -> launcherGateServo.setPosition(next - curr));
@@ -82,7 +72,7 @@ public class Launcher implements Mechanism {
 
     public double getServoPos() {
         return launcherGateServo.getPosition();
-    }
+    }*/
 
     public double getMotorSpeed() {
         return launcherMotor.getThrottle();
@@ -92,13 +82,13 @@ public class Launcher implements Mechanism {
 //        return Math.abs(currentVelocity.getMagnitude() - targetVelocity.getMagnitude()) <= TOLERANCE;
 //    }
 
-    public void pollenCompress(){
+   /* public void pollenCompress(){
         compressionServo.setPosition(POLLEN_COMPRESS_POS);
     }
 
     public void nectarCompress(){
         compressionServo.setPosition(NECTAR_COMPRESS_POS);
-    }
+    }*/
 
 //    public Command moveGate(){
 //

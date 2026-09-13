@@ -11,10 +11,10 @@ import dev.nextftc.robot.Mechanism;
 
 public class Drivetrain implements Mechanism {
     public Drivetrain(){}
-    public final NextMotor frontLeft = new NextMotor(RobotController.expansionHub(), Config.frontLeftMotor);
-    public final NextMotor frontRight = new NextMotor(RobotController.controlHub(), Config.frontRightMotor);
-    public final NextMotor backLeft = new NextMotor(RobotController.expansionHub(), Config.backLeftMotor);
-    public final NextMotor backRight =  new NextMotor(RobotController.controlHub(), Config.backRightMotor);
+    public final NextMotor frontLeft = new NextMotor(RobotController.controlHub(), Config.frontLeftMotor);
+    public final NextMotor frontRight = new NextMotor(RobotController.expansionHub(), Config.frontRightMotor);
+    public final NextMotor backLeft = new NextMotor(RobotController.controlHub(), Config.backLeftMotor);
+    public final NextMotor backRight =  new NextMotor(RobotController.expansionHub(), Config.backRightMotor);
 
 
 

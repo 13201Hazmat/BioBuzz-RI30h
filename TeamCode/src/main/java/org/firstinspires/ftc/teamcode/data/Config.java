@@ -4,7 +4,7 @@ public class Config {
     //Control Hub
     public static int frontLeftMotor = 0;
     public static int backLeftMotor = 1;
-    public static int c = 2;
+    public static int leftLiftMotor = 2;
     public static int intakeMotor = 3;
 
     public static int rampServo = 1;
@@ -18,8 +18,8 @@ public class Config {
     //Expansion hub
     public static int frontRightMotor = 0;
     public static int backRightMotor = 1;
-    public static int k = 2;
-    public static int putterMotor = 3;
+    public static int rightLiftMotor = 2;
+    public static int launcherMotor = 3;
 
     public static int m = 0;
 

@@ -17,6 +17,8 @@ public class Transfer implements Mechanism {
     public Transfer(){}
 
     private final double OPEN_POS = 0.0;
+
+    private final double MID_POS = OPEN_POS / 2;
     private final double CLOSE_POS = 0.0;
 
     private final double DISTANCE = 0.0;
@@ -45,6 +47,8 @@ public class Transfer implements Mechanism {
     public Command close(){
         return setPosition(CLOSE_POS);
     }
+
+    public Command mid(){return setPosition(MID_POS);}
 
     private void updateBallType(){
         if (bucketSensor.isColorWithinDistance(yellow, DISTANCE)){
