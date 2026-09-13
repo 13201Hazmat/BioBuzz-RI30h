@@ -32,7 +32,7 @@ public class Intake implements Mechanism {
         intakeState = IntakeState.OFF;
         power = off;
 
-        i.setDirection(NextMotor.Direction.REVERSE);
+        i.setDirection(NextMotor.Direction.FORWARD);
     }
 
     private void setState(IntakeState intakeState) {
@@ -40,7 +40,6 @@ public class Intake implements Mechanism {
     }
 
     public Command setSpeed(IntakeState s) {
-
         return instant(() -> this.setState(s));
     }
 
@@ -48,13 +47,11 @@ public class Intake implements Mechanism {
         return i.getThrottle();
     }
 
-
     public void cycle(){
-        if (intakeState == IntakeState.REVERSE) intakeState = IntakeState.FORWARD;
-        else if (intakeState == IntakeState.FORWARD)  intakeState = IntakeState.REVERSE;
+        if (intakeState == IntakeState.FORWARD) intakeState = IntakeState.REVERSE;
+        else if (intakeState == IntakeState.REVERSE)  intakeState = IntakeState.OFF;
         else intakeState = IntakeState.FORWARD;
     }
-
 
 
     @Override

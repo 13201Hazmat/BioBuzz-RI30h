@@ -32,7 +32,6 @@ public class Lift implements Mechanism {
         HOME
     }
 
-    private double lastGoalPosition = 0.0;
 
     public Lift() {
         l.setDirection(NextMotor.Direction.REVERSE);
@@ -43,7 +42,6 @@ public class Lift implements Mechanism {
     }
 
     private void setPos(double goalTicks) {
-        lastGoalPosition = goalTicks;
         Angle setpointAngle = Degrees.of(360.0 * goalTicks / TICKS_PER_ROTATION);
         l.setPositionSetpoint(setpointAngle);
 
@@ -61,10 +59,6 @@ public class Lift implements Mechanism {
                     break;
             }
         }).requiring(this);
-    }
-
-    private double check(){
-        return l.getEncoderPosition().getMagnitude();
     }
     public Command deltaUp(){
         return Commands.instant(()-> setPos(l.getEncoderPosition().getMagnitude() + 50));

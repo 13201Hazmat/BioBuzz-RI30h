@@ -27,24 +27,19 @@ public class Teleop extends NextOpMode {
         Trigger.Companion.getDefaultEventLoop().clear();
 
         CommandGamepad gp1 = new CommandGamepad(gamepad1);
+        CommandGamepad gp2 = new CommandGamepad(gamepad2);
+
 
         hazmatRobot.startDrive(gamepad1);
 
         gp1.leftBumper().onTrue(instant(()->hazmatRobot.getIntake().cycle()));
+        gp1.rightBumper().onTrue(hazmatRobot.launch());
 
-        gp1.circle().onTrue(hazmatRobot.getLauncher().setPowerThingy());
+        gp2.dpadUp().onTrue(hazmatRobot.getLauncher().incrementPower());
+        gp2.dpadDown().onTrue(hazmatRobot.getLauncher().decrementPower());
 
-        gp1.dpadLeft()
-                .toggleOnTrue(hazmatRobot.getTransfer().open())
-                .toggleOnFalse(hazmatRobot.getTransfer().close());
-//        gp1.dpadUp().onTrue(hazmatRobot.getLauncher().incrementLauncherGate());
-//        gp1.dpadDown().onTrue(hazmatRobot.getLauncher().decrementLauncherGate());
-
-        gp1.dpadUp().onTrue(hazmatRobot.getLauncher().incrementPower());
-        gp1.dpadDown().onTrue(hazmatRobot.getLauncher().decrementPower());
-
-        gp1.dpadRight().onTrue(hazmatRobot.getLift().deltaUp());
-        gp1.dpadLeft().onTrue(hazmatRobot.getLift().deltaDown());
+        gp2.circle().onTrue(hazmatRobot.getTransfer().open());
+        gp2.square().onTrue(hazmatRobot.getTransfer().close());
 
     }
 
@@ -53,7 +48,6 @@ public class Teleop extends NextOpMode {
 //        telemetry.addData("Launcher Gate Servo Position", hazmatRobot.getLauncher().getServoPos());
         telemetry.addData("Launcher Motor Power", hazmatRobot.getLauncher().getMotorSpeed());
         telemetry.addData("Intake state", hazmatRobot.getIntake().getSpeed());
-        telemetry.addData("Color Sensor Result", hazmatRobot.getTransfer().getResult());
 
         telemetry.update();
     }

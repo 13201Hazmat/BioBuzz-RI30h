@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.robot;
 
+import static com.pedropathing.ivy.commands.Commands.waitMs;
+import static com.pedropathing.ivy.commands.Commands.waitUntil;
 import static com.pedropathing.ivy.groups.Groups.parallel;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 
@@ -85,14 +87,20 @@ public class HazmatRobot implements NextRobot {
         );
     }
 
-    public Command prepLaunch(){
+    public Command launch(){
         return sequential(
-            intake.setSpeed(Intake.IntakeState.REVERSE),
+            intake.setSpeed(Intake.IntakeState.OFF),
+            launcher.setPoint1(),
             parallel(
                  lift.setPosition(Lift.LiftState.LAUNCH),
                  transfer.mid()
             ),
-            transfer.open()
+            waitUntil(launcher::isAtVelocity),
+            transfer.open(),
+            waitMs(2000),
+            transfer.close(),
+            launcher.stopLauncher(),
+            intake.setSpeed(Intake.IntakeState.FORWARD)
         );
     }
 
