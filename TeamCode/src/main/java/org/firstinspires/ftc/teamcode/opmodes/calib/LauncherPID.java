@@ -16,52 +16,36 @@ import dev.nextftc.robot.triggers.Trigger;
 @NextTeleop(name = "Launcher PIDFF")
 public class LauncherPID extends NextOpMode {
     public static double targetVelocity = 1000;
-    public static double kV = 0.0004;
     public static double kS = 0.02;
     private final HazmatRobot robot;
-    // Subsystems
-    private Launcher launcher;
     public LauncherPID(HazmatRobot robot) {
         super(robot);
         this.robot = robot;
 
         Trigger.Companion.getDefaultEventLoop().clear();
+    }
+
+    @Override
+    public void start() {
+        schedule(instant(() -> robot.getLauncher().setTargetVelocity(targetVelocity)));
 
         CommandGamepad gp1 = new CommandGamepad(gamepad1);
-
-        gp1.rightBumper().onTrue(instant(() -> kV+=0.01));
-        gp1.leftBumper().onTrue(instant(() -> kV-=0.01));
 
         gp1.dpadRight().onTrue(instant(() -> kS+=0.01));
         gp1.dpadLeft().onTrue(instant(() -> kS-=0.01));
     }
 
     @Override
-    public void disabledPeriodic() {
-        telemetry.addLine("Launcher PIDFF Tuner Ready!");
-    }
-
-    @Override
-    public void start() {
-        schedule(instant(() -> launcher.setTargetVelocity(targetVelocity)));
-    }
-
-    @Override
     public void periodic() {
-
-        // Update shooter velocity & hood angle
-        schedule(instant(() -> launcher.setTargetVelocity(targetVelocity)));
 
         // Update PID / FF constants
 
-        launcher.kV = kV;
-        launcher.kS = kS;
+        robot.getLauncher().kS = kS;
 
         // Telemetry
         telemetry.addData("Target Velocity", targetVelocity);
-        telemetry.addData("Measured Velocity", launcher.getLauncherMotor().getEncoderVelocity().into(RotationsPerMinute));
+        telemetry.addData("Measured Velocity", robot.getLauncher().getLauncherMotor().getEncoderVelocity().into(RotationsPerMinute));
 
-        telemetry.addData("kV", kV);
         telemetry.addData("kS", kS);
 
         telemetry.update();
