@@ -17,22 +17,22 @@ public class PathsAndPoses {
 
     // WE ARE ALWAYS MAKING RED SIDE POSES
     public void mirrorPose(Alliance alliance){
-        if(alliance == Alliance.BLUE){
-            poseFactory.mirrorY(72.0);
+        if (alliance == Alliance.RED) {
             poseFactory.mirrorX(72.0);
+            poseFactory.mirrorY(72.0);
         }
     }
 
     // MAKE POSES HERE
-    public final Pose startPos = poseFactory.of(82.5, 8.5, 270);
-    public final Pose leavePos = poseFactory.of(82.5, 15, 270);
+    public final Pose startPos = poseFactory.of(83, 8.65, 270);
+    public final Pose leavePos = poseFactory.of(137.37, 30, 180);
     // MAKE PATHS HERE
 
     public Path startPos_to_leavePos() {
-        return through(startPos, leavePos).linear(startPos, leavePos);
+        return through(startPos, leavePos).constant(startPos);
     }
 
     public Path leavePos_to_startPos(){
-        return line(leavePos, startPos).linear(leavePos, startPos);
+        return line(leavePos, startPos).constant(leavePos);
     }
 }
