@@ -36,31 +36,32 @@ public class Auto extends NextOpMode {
 
     @Override
     public void start() {
-        telemetry.addLine("Select an alliance");
-        telemetry.addLine("BLUE is D-pad left");
-        telemetry.addLine("RED is D-pad right");
-        if(gamepad1.dpadLeftWasPressed()){
-            selectedAlliance = Alliance.BLUE;
-        }
-        else if(gamepad1.dpadRightWasPressed()){
-            selectedAlliance = Alliance.RED;
-        }
-        hazmatRobot.setAlliance(selectedAlliance);
-        telemetry.addLine("Pick an auto");
-        telemetry.addLine("Right bumper for LeaveAuto");
-        telemetry.addLine("Left bumper for PreloadAuto");
-        telemetry.addLine("Cross for CycleAuto");
-        if(gamepad1.rightBumperWasPressed()){
-            selectedRoutine = routines.leaveAuto(hazmatRobot.getAlliance());
-        }
-        else if(gamepad1.leftBumperWasPressed()){
-            selectedRoutine = routines.preloadAuto(hazmatRobot.getAlliance());
-        }
-        else if(gamepad1.crossWasPressed()){
-            selectedRoutine = routines.fullCycleAuto(hazmatRobot.getAlliance());
-        }
-        hazmatRobot.getFollower().setPose(paths.startPos);
-        schedule(selectedRoutine);
+//        telemetry.addLine("Select an alliance");
+//        telemetry.addLine("BLUE is D-pad left");
+//        telemetry.addLine("RED is D-pad right");
+//        if(gamepad1.dpadLeftWasPressed()){
+//            selectedAlliance = Alliance.BLUE;
+//        }
+//        else if(gamepad1.dpadRightWasPressed()){
+//            selectedAlliance = Alliance.RED;
+//        }
+//        hazmatRobot.setAlliance(selectedAlliance);
+//        telemetry.addLine("Pick an auto");
+//        telemetry.addLine("Right bumper for LeaveAuto");
+//        telemetry.addLine("Left bumper for PreloadAuto");
+//        telemetry.addLine("Cross for CycleAuto");
+//        if(gamepad1.rightBumperWasPressed()){
+//            selectedRoutine = routines.leaveAuto(hazmatRobot.getAlliance());
+//        }
+//        else if(gamepad1.leftBumperWasPressed()){
+//            selectedRoutine = routines.preloadAuto(hazmatRobot.getAlliance());
+//        }
+//        else if(gamepad1.crossWasPressed()){
+//            selectedRoutine = routines.fullCycleAuto(hazmatRobot.getAlliance());
+//        }
+//        hazmatRobot.getFollower().setPose(paths.startPos);
+//        schedule(selectedRoutine);
+        schedule(routines.preloadAuto(Alliance.BLUE));
     }
 
     @Override
