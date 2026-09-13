@@ -18,27 +18,17 @@ public class PathsAndPoses {
     public void mirrorPose(Alliance alliance){
         if(alliance == Alliance.BLUE){
             poseFactory.mirrorY(72.0);
+            poseFactory.mirrorX(72.0);
         }
     }
 
     // MAKE POSES HERE
     public final Pose startPos = poseFactory.of(82.5, 133, 270);
     public final Pose leavePos = poseFactory.of(130, 127, 0);
-    // TODO ADD LAUNCH POS
-    public final Pose launchPos = poseFactory.of(0, 0, 0);
-
     // MAKE PATHS HERE
 
     public Path startPos_to_leavePos() {
         return line(startPos, leavePos).linear(startPos, leavePos);
-    }
-
-    public Path startPos_to_launchPos() {
-        return line(startPos, launchPos).linear(startPos, launchPos);
-    }
-
-    public Path launchPos_to_endPos(){
-        return line(launchPos, leavePos).linear(launchPos, leavePos);
     }
 
     public Path endPos_to_startPos(){

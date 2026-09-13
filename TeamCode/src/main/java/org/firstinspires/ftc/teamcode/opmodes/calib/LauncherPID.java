@@ -5,7 +5,6 @@ import static com.pedropathing.ivy.commands.Commands.instant;
 
 import static dev.nextftc.units.Units.RotationsPerMinute;
 
-import org.firstinspires.ftc.teamcode.mechanisms.Launcher;
 import org.firstinspires.ftc.teamcode.robot.HazmatRobot;
 
 import dev.nextftc.robot.opmode.NextOpMode;

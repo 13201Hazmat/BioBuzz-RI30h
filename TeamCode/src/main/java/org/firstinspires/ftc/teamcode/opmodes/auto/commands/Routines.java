@@ -6,6 +6,7 @@ import static com.pedropathing.ivy.groups.Groups.sequential;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.ivy.Command;
 
+import org.firstinspires.ftc.teamcode.data.Alliance;
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 import org.firstinspires.ftc.teamcode.opmodes.auto.paths.PathsAndPoses;
 import org.firstinspires.ftc.teamcode.robot.HazmatRobot;
@@ -24,29 +25,32 @@ public class Routines {
         this.commands = commands;
     }
 
-    public Command leaveAuto() {
+    public Command leaveAuto(Alliance alliance) {
+        paths.mirrorPose(alliance);
         return sequential(
                 commands.runPath(paths.startPos_to_leavePos())
         );
     }
 
-    public Command preloadAuto() {
+    public Command preloadAuto(Alliance alliance) {
+        paths.mirrorPose(alliance);
         return sequential(
-                commands.runPath(paths.startPos_to_launchPos()),
-//                robot.launch(),
+                robot.launch(),
                 parallel(
-                        commands.runPath(paths.launchPos_to_endPos()),
+                        commands.runPath(paths.startPos_to_leavePos()),
                         robot.getIntake().setSpeed(Intake.IntakeState.FORWARD)
                 )
         );
     }
 
 
-    public Command fullCycleAuto() {
+    public Command fullCycleAuto(Alliance alliance) {
+        paths.mirrorPose(alliance);
         return sequential(
-                preloadAuto(),
+                preloadAuto(alliance),
+                commands.runPath(paths.endPos_to_startPos()),
+                robot.launch(),
                 commands.runPath(paths.endPos_to_startPos())
-//                robot.launch()
         );
     }
 
