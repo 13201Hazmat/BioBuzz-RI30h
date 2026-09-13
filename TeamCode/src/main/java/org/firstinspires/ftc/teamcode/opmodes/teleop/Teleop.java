@@ -27,6 +27,8 @@ public class Teleop extends NextOpMode {
 
         CommandGamepad gp1 = new CommandGamepad(gamepad1);
 
+        hazmatRobot.startDrive(gamepad1);
+
         gp1.leftBumper().whileTrue(hazmatRobot.getIntake().on());
         gp1.leftBumper().whileTrue(hazmatRobot.getIntake().reverse());
 
