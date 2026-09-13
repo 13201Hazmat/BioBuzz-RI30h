@@ -52,7 +52,6 @@ public class Vision implements Mechanism {
     public NextLimelight getLimelight() {
         return limelight;
     }
-
     public Pose getFinalPose(double targetX, double targetY, Pose currentPose) {
 
         if (currentPose == null) {

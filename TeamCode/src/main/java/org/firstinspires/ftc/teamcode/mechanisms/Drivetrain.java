@@ -10,7 +10,10 @@ import dev.nextftc.hardware.actuators.NextServo;
 import dev.nextftc.robot.Mechanism;
 
 public class Drivetrain implements Mechanism {
-    public Drivetrain(){}
+    public Drivetrain(){
+        frontRight.setDirection(NextMotor.Direction.REVERSE);
+        backRight.setDirection(NextMotor.Direction.REVERSE);
+    }
     public final NextMotor frontLeft = new NextMotor(RobotController.controlHub(), Config.frontLeftMotor);
     public final NextMotor frontRight = new NextMotor(RobotController.expansionHub(), Config.frontRightMotor);
     public final NextMotor backLeft = new NextMotor(RobotController.controlHub(), Config.backLeftMotor);

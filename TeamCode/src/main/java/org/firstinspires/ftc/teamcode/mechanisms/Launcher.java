@@ -8,17 +8,22 @@ import org.firstinspires.ftc.teamcode.data.Config;
 
 import dev.nextftc.hardware.RobotController;
 import dev.nextftc.hardware.actuators.NextMotor;
+import dev.nextftc.hardware.actuators.NextServo;
 import dev.nextftc.robot.Mechanism;
 
 public class Launcher implements Mechanism {
-    private final NextMotor launcherMotor = new NextMotor(RobotController.expansionHub(), Config.launcherMotor);
+    private final NextMotor launcherMotor = new NextMotor("l");
+    private final NextServo launcherServo = new NextServo(RobotController.controlHub(),Config.launcherServo,0);
 
-    private final double TOLERANCE = 25.0;
+    private final double TOLERANCE = 5000;
     private final double DELTA = 50.0;
-    private final double POINT1 = 0.0;
+    private final double POINT1 = 67;
 
-    public double kV = 0.0000688;
-    public double kS = 0.465;
+    private final double POLLEN = 0.58;
+    private final double NECTAR = 0.5;
+
+    public double kV = 0.0000571;
+    public double kS = 0.16;
 
     private double curPower = 0.5;
     private double currentVelocity = 0.0;
@@ -26,10 +31,12 @@ public class Launcher implements Mechanism {
 
     public Launcher(){
         launcherMotor.getVelocityConstants().setKV(kV);
-        launcherMotor.getVelocityConstants().setKV(kS);
-
+        launcherMotor.getVelocityConstants().setKS(kS);
     }
 
+    public Command init(){
+        return instant(()->launcherServo.setPosition(POLLEN));
+    }
     public NextMotor getLauncherMotor(){
         return launcherMotor;
     }
@@ -53,6 +60,25 @@ public class Launcher implements Mechanism {
         return instant(()->launcherMotor.setVelocitySetpoint(RotationsPerMinute.of(currentVelocity - DELTA)));
     }
 
+    public Command servoUp(){
+        return instant(()->launcherServo.setPosition(launcherServo.getPosition() + 0.01));
+    }
+
+    public Command servoDown(){
+        return instant(()->launcherServo.setPosition(launcherServo.getPosition() - 0.01));
+    }
+
+    public Command setPollen(){
+        return instant(()-> launcherServo.setPosition(POLLEN));
+    }
+
+    public Command setNectar(){
+        return instant(()-> launcherServo.setPosition(NECTAR));
+    }
+
+
+/*
+
     public Command setPowerThingy() {
         curPower = 0.5;
         return instant(() -> launcherMotor.setThrottle(0.5));
@@ -67,6 +93,7 @@ public class Launcher implements Mechanism {
         curPower -=0.01;
         return instant(() -> launcherMotor.setThrottle(curPower - 0.01));
     }
+*/
 
 
 //    public double getMotorSpeed() {

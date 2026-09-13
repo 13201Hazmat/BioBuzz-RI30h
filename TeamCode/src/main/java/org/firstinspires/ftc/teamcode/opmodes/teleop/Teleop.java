@@ -34,14 +34,19 @@ public class Teleop extends NextOpMode {
         CommandGamepad gp2 = new CommandGamepad(gamepad2);
 
 
+        hazmatRobot.init().schedule();
+
         hazmatRobot.startDrive(gamepad1);
 
         gp1.leftBumper().onTrue(instant(()->hazmatRobot.getIntake().cycle()));
         gp1.rightBumper().onTrue(hazmatRobot.launch());
 
+        gp1.dpadUp().onTrue(hazmatRobot.getLauncher().setPollen());
+        gp1.dpadDown().onTrue(hazmatRobot.getLauncher().setNectar());
 
+/*
         gp2.dpadUp().onTrue(hazmatRobot.getLauncher().incrementPower());
-        gp2.dpadDown().onTrue(hazmatRobot.getLauncher().decrementPower());
+        gp2.dpadDown().onTrue(hazmatRobot.getLauncher().decrementPower());*/
 
         gp2.circle().onTrue(hazmatRobot.getTransfer().open());
         gp2.square().onTrue(hazmatRobot.getTransfer().close());

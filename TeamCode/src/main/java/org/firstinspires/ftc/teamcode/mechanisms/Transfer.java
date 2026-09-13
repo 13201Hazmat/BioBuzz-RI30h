@@ -15,7 +15,6 @@ import dev.nextftc.robot.Mechanism;
 
 public class Transfer implements Mechanism {
     public Transfer(){
-        setPosition(CLOSE_POS);
     }
 
     private final double OPEN_POS = 0.0;

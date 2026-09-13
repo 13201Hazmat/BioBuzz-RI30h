@@ -83,24 +83,30 @@ public class HazmatRobot implements NextRobot {
                 drivetrain.backLeft,
                 drivetrain.backRight,
                 gamepad1
+        ).schedule();
+    }
+
+    public Command init(){
+        return parallel(
+            transfer.close(),
+            lift.setPosition(Lift.LiftState.HOME),
+            launcher.setPollen()
         );
     }
 
     public Command launch(){
         return sequential(
             intake.setSpeed(Intake.IntakeState.OFF),
+            lift.setPosition(Lift.LiftState.LAUNCH),
             launcher.setPoint1(),
-            parallel(
-                 lift.setPosition(Lift.LiftState.LAUNCH),
-                 transfer.mid()
-            ),
-            waitUntil(launcher::isAtVelocity),
-            transfer.open(),
             waitMs(2000),
+            transfer.open(),
+            waitMs(2500),
             transfer.close(),
-            lift.setPosition(Lift.LiftState.HOME),
             launcher.stopLauncher(),
+            lift.setPosition(Lift.LiftState.HOME),
             intake.setSpeed(Intake.IntakeState.FORWARD)
+
         );
     }
 

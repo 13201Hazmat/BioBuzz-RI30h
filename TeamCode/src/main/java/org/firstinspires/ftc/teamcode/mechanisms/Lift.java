@@ -17,9 +17,9 @@ public class Lift implements Mechanism {
     private static final double kP = 0.005;
     private static final double kD = 0;
 
-    private static final double LAUNCH_TICKS = 200;
+    private static final double LAUNCH_TICKS = 100;
     private static final double LOW_TICKS = 1000;
-    private static final double HOME_TICKS = 100;
+    private static final double HOME_TICKS = 30;
 
     private static final double TICKS_PER_ROTATION = 384.5; //435 motor
 
@@ -42,10 +42,11 @@ public class Lift implements Mechanism {
 
         r.getPositionConstants().setKP(kP);
         r.getPositionConstants().setKD(kD);
-
-        setPosition(LiftState.HOME);
     }
 
+    public Command init(){
+       return instant(()->setPosition(LiftState.LAUNCH));
+    }
     private void setPos(double goalTicks) {
         Angle setpointAngle = Degrees.of(360.0 * goalTicks / TICKS_PER_ROTATION);
         l.setPositionSetpoint(setpointAngle);
@@ -55,12 +56,12 @@ public class Lift implements Mechanism {
     public Command setPosition(LiftState state) {
         return Commands.instant(() -> {
             switch (state) {
-                case LAUNCH:
-                    setPos(LAUNCH_TICKS);
-                    break;
                 case HOME:
-                default:
                     setPos(HOME_TICKS);
+                    break;
+                case LAUNCH:
+                default:
+                    setPos(LAUNCH_TICKS);
                     break;
             }
         }).requiring(this);
@@ -77,4 +78,6 @@ public class Lift implements Mechanism {
     public String getPos() {
         return "Left Encoder:" + l.getEncoderPosition().getMagnitude() + " Right Encoder:" + r.getEncoderPosition().getMagnitude();
     }
+
+
 }

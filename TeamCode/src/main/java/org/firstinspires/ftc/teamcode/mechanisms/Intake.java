@@ -14,7 +14,7 @@ import dev.nextftc.robot.Mechanism;
 import dev.nextftc.units.measuretypes.AngularVelocity;
 
 public class Intake implements Mechanism {
-    NextMotor i = new NextMotor(RobotController.controlHub(), Config.intakeMotor);
+    NextMotor i = new NextMotor(RobotController.expansionHub(), Config.intakeMotor);
     private IntakeState intakeState;
     public enum IntakeState {
         FORWARD,
@@ -32,7 +32,7 @@ public class Intake implements Mechanism {
         intakeState = IntakeState.OFF;
         power = off;
 
-        i.setDirection(NextMotor.Direction.FORWARD);
+        i.setDirection(NextMotor.Direction.REVERSE);
     }
 
     private void setState(IntakeState intakeState) {
