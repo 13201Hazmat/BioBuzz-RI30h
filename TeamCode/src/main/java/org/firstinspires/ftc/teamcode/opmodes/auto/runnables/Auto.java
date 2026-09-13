@@ -5,6 +5,7 @@ import static com.pedropathing.ivy.Scheduler.schedule;
 import com.pedropathing.ivy.Command;
 import com.pedropathing.ivy.Scheduler;
 
+import org.firstinspires.ftc.teamcode.data.Alliance;
 import org.firstinspires.ftc.teamcode.opmodes.auto.commands.AutoCommands;
 import org.firstinspires.ftc.teamcode.opmodes.auto.commands.Routines;
 import org.firstinspires.ftc.teamcode.opmodes.auto.paths.PathsAndPoses;
@@ -20,6 +21,7 @@ public class Auto extends NextOpMode {
     private final AutoCommands commands;
     private final PathsAndPoses paths;
     private Command selectedRoutine;
+    private Alliance selectedAlliance;
 
     public Auto(HazmatRobot hazmatRobot) {
         super(hazmatRobot);
@@ -35,18 +37,28 @@ public class Auto extends NextOpMode {
 
     @Override
     public void start() {
+        telemetry.addLine("Select an alliance");
+        telemetry.addLine("BLUE is D-pad left");
+        telemetry.addLine("RED is D-pad right");
+        if(gamepad1.dpadLeftWasPressed()){
+            selectedAlliance = Alliance.BLUE;
+        }
+        else if(gamepad1.dpadRightWasPressed()){
+            selectedAlliance = Alliance.RED;
+        }
+        hazmatRobot.setAlliance(selectedAlliance);
         telemetry.addLine("Pick an auto");
         telemetry.addLine("Right bumper for LeaveAuto");
         telemetry.addLine("Left bumper for PreloadAuto");
         telemetry.addLine("Cross for CycleAuto");
         if(gamepad1.rightBumperWasPressed()){
-            selectedRoutine = routines.leaveAuto();
+            selectedRoutine = routines.leaveAuto(hazmatRobot.getAlliance());
         }
         else if(gamepad1.leftBumperWasPressed()){
-            selectedRoutine = routines.preloadAuto();
+            selectedRoutine = routines.preloadAuto(hazmatRobot.getAlliance());
         }
         else if(gamepad1.crossWasPressed()){
-            selectedRoutine = routines.fullCycleAuto();
+            selectedRoutine = routines.fullCycleAuto(hazmatRobot.getAlliance());
         }
         schedule(selectedRoutine);
     }

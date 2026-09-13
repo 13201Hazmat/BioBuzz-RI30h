@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.ivy.Command;
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.data.Alliance;
 import org.firstinspires.ftc.teamcode.mechanisms.Drivetrain;

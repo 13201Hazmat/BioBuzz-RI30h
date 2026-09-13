@@ -18,6 +18,7 @@ public class PathsAndPoses {
     public void mirrorPose(Alliance alliance){
         if(alliance == Alliance.BLUE){
             poseFactory.mirrorY(72.0);
+            poseFactory.mirrorX(72.0);
         }
     }
 
