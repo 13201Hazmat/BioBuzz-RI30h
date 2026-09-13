@@ -14,10 +14,10 @@ import dev.nextftc.units.measuretypes.Angle;
 
 public class Lift implements Mechanism {
 
-    private static final double kP = 0.01;
+    private static final double kP = 0.005;
     private static final double kD = 0;
 
-    private static final double LAUNCH_TICKS = 2000;
+    private static final double LAUNCH_TICKS = 135;
     private static final double LOW_TICKS = 1000;
     private static final double HOME_TICKS = 0;
 
@@ -39,6 +39,9 @@ public class Lift implements Mechanism {
 
         l.getPositionConstants().setKP(kP);
         l.getPositionConstants().setKD(kD);
+
+        r.getPositionConstants().setKP(kP);
+        r.getPositionConstants().setKD(kD);
     }
 
     private void setPos(double goalTicks) {

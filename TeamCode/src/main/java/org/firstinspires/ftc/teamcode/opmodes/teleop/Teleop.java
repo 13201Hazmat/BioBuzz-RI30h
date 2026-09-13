@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.opmodes.teleop;
 
 import static com.pedropathing.ivy.commands.Commands.instant;
 
+import static dev.nextftc.units.Units.RotationsPerMinute;
+
 import com.pedropathing.ivy.Scheduler;
 
 import org.firstinspires.ftc.teamcode.robot.HazmatRobot;
@@ -37,7 +39,7 @@ public class Teleop extends NextOpMode {
         gp1.leftBumper().onTrue(instant(()->hazmatRobot.getIntake().cycle()));
         gp1.rightBumper().onTrue(hazmatRobot.launch());
 
-        gp1.cross().onTrue(instant(() -> hazmatRobot.getLauncher().getLauncherMotor().setThrottle(1)));
+
         gp2.dpadUp().onTrue(hazmatRobot.getLauncher().incrementPower());
         gp2.dpadDown().onTrue(hazmatRobot.getLauncher().decrementPower());
 
@@ -48,9 +50,10 @@ public class Teleop extends NextOpMode {
 
     @Override
     public void periodic() {
-//        telemetry.addData("Launcher Gate Servo Position", hazmatRobot.getLauncher().getServoPos());
-        telemetry.addData("Launcher Motor Power", hazmatRobot.getLauncher().getMotorSpeed());
-        telemetry.addData("Intake state", hazmatRobot.getIntake().getSpeed());
+        telemetry.addData("Intake Speed", hazmatRobot.getIntake().getSpeed());
+        telemetry.addData("Lift Position", hazmatRobot.getLift().getPos());
+        telemetry.addData("Bucket Position", hazmatRobot.getTransfer().getRampServo().getPosition());
+        telemetry.addData("Launcher Motor Velocity", hazmatRobot.getLauncher().getLauncherMotor().getEncoderVelocity().into(RotationsPerMinute));
 
         telemetry.update();
     }

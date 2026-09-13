@@ -39,7 +39,7 @@ public class ServoCalib extends NextOpMode {
     public void start() {
         Trigger.Companion.getDefaultEventLoop().clear();
         CommandGamepad gp1 = new CommandGamepad(gamepad1);
-        robot.startDrive(gamepad1);
+//        robot.startDrive(gamepad1);
 
         gp1.rightBumper().onTrue(robot.getTransfer().deltaUp());
         gp1.leftBumper().onTrue(robot.getTransfer().deltaDown());
@@ -54,6 +54,9 @@ public class ServoCalib extends NextOpMode {
     @Override
     public void periodic() {
         super.periodic();
+
+        telemetry.addData("servo pos", robot.getTransfer().getRampServo().getPosition());
+        telemetry.addData("lift pos", robot.getLift().getPos());
     }
 
     @Override

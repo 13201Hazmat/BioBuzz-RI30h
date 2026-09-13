@@ -20,7 +20,11 @@ public class Transfer implements Mechanism {
     private final double MID_POS = OPEN_POS / 2;
     private final double CLOSE_POS = 1.0;
 
-    NextServo rampServo = new NextServo(RobotController.controlHub(), Config.rampServo);
+    private NextServo rampServo = new NextServo(RobotController.controlHub(), Config.rampServo,0);
+
+    public NextServo getRampServo() {
+        return rampServo;
+    }
 
     public Command deltaUp(){
         return instant(() -> rampServo.setPosition(rampServo.getPosition() + 0.01));
