@@ -17,8 +17,8 @@ public class Launcher implements Mechanism {
     private final double DELTA = 50.0;
     private final double POINT1 = 0.0;
 
-    private final int kV = 0;
-    private final int kS = 0;
+    public double kV = 0;
+    public double kS = 0;
 
     private double curPower = 0.5;
     private double currentVelocity = 0.0;
@@ -65,9 +65,9 @@ public class Launcher implements Mechanism {
     }
 
 
-    public double getMotorSpeed() {
-        return launcherMotor.getThrottle();
-    }
+//    public double getMotorSpeed() {
+//        return launcherMotor.getThrottle();
+//    }
 
     public boolean isAtVelocity(){
         return Math.abs(currentVelocity - targetVelocity) <= TOLERANCE;
