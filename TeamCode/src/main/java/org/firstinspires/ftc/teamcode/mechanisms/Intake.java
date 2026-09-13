@@ -9,11 +9,40 @@ import dev.nextftc.hardware.actuators.NextMotor;
 import dev.nextftc.robot.Mechanism;
 
 public class Intake implements Mechanism {
-    /**
-     * Intake constructor.
-     */
-    public Intake(){}
-    enum IntakeState {
+    private IntakeState intakeState;
+
+    public Intake() {
+        intakeState = IntakeState.OFF;
+    }
+
+    public Command on() {
+        return instant(() -> {
+            intakeMotor.setThrottle(IntakeState.ON.getPower());
+            this.intakeState = IntakeState.ON;
+        });
+    }
+
+    final private NextMotor intakeMotor = new NextMotor(RobotController.controlHub(), Config.intakeMotor);
+
+    public Command off() {
+        return instant(() -> {
+            intakeMotor.setThrottle(IntakeState.OFF.getPower());
+            this.intakeState = IntakeState.OFF;
+        });
+    }
+
+    public Command reverse() {
+        return instant(() -> {
+            intakeMotor.setThrottle(IntakeState.REVERSE.getPower());
+            this.intakeState = IntakeState.REVERSE;
+        });
+    }
+
+    public IntakeState getIntakeState() {
+        return intakeState;
+    }
+
+    public enum IntakeState {
         ON(1),
         OFF(0),
         REVERSE(-1);
@@ -27,25 +56,5 @@ public class Intake implements Mechanism {
             return power;
         }
     }
-
-    final private NextMotor intakeMotor = new NextMotor(RobotController.controlHub(), Config.intakeMotor);
-
-    /**
-     * A method to turn intake on.
-     * @return a command that sets intake on
-     */
-    public Command on() {return instant(() -> intakeMotor.setThrottle(IntakeState.ON.getPower()));}
-
-    /**
-     * A method to turn intake off.
-     * @return a command that sets intake off
-     */
-    public Command off(){return instant(() -> intakeMotor.setThrottle(IntakeState.OFF.getPower()));}
-
-    /**
-     * A method to turn intake reverse.
-     * @return a command that sets reverse
-     */
-    public Command reverse(){return instant(() -> intakeMotor.setThrottle(IntakeState.REVERSE.getPower()));}
 }
 

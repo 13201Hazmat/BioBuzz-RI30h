@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.mechanisms;
 
 import static dev.nextftc.units.Units.RotationsPerSecond;
 
-import org.firstinspires.ftc.teamcode.data.Config;
+import com.pedropathing.ivy.Command;
 
 import dev.nextftc.control.feedback.PIDCoefficients;
 import dev.nextftc.control.feedback.PIDController;
@@ -41,6 +41,35 @@ public class Launcher implements Mechanism {
         double error = velocity - currentVelocity.getMagnitude();
         targetVelocity = RotationsPerSecond.of(pid.calculate(error));
         launcherMotor.setVelocitySetpoint(targetVelocity);
+    }
+
+    @Deprecated
+    public Command setPowerThingy() {
+        return instant(() -> launcherMotor.setThrottle(0.8));
+    }
+
+    public Command incrementLauncherGate() {
+        double next = 0.01;
+        double curr = launcherGateServo.getPosition();
+        return instant(() -> launcherGateServo.setPosition(next + curr));
+    }
+
+    public Command decrementLauncherGate() {
+        double next = 0.01;
+        double curr = launcherGateServo.getPosition();
+        return instant(() -> launcherGateServo.setPosition(next - curr));
+    }
+
+    public Command zeroLauncherGate() {
+        return instant(() -> launcherGateServo.setPosition(0));
+    }
+
+    public double getServoPos() {
+        return launcherGateServo.getPosition();
+    }
+
+    public double getMotorSpeed() {
+        return launcherMotor.getThrottle();
     }
 
     public boolean isAtVelocity(){
