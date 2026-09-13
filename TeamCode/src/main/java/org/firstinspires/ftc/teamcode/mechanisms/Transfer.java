@@ -55,6 +55,10 @@ public class Transfer implements Mechanism {
             BallType.current = BallType.NOTHING;
         }
     }
+
+    public String getResult(){
+        return bucketSensor.debug();
+    }
     @Override
     public void periodic(){
         bucketSensor.update();

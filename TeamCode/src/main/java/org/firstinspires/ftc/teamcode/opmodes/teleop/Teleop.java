@@ -42,6 +42,7 @@ public class Teleop extends NextOpMode {
         telemetry.addData("Launcher Gate Servo Position", hazmatRobot.getLauncher().getServoPos());
         telemetry.addData("Launcher Motor Power", hazmatRobot.getLauncher().getMotorSpeed());
         telemetry.addData("Intake state", hazmatRobot.getIntake().getIntakeState());
+        telemetry.addData("Color Sensor Result", hazmatRobot.getTransfer().getResult());
 
         telemetry.update();
     }

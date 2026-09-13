@@ -4,6 +4,8 @@ import static dev.nextftc.units.Units.RotationsPerSecond;
 
 import com.pedropathing.ivy.Command;
 
+import org.firstinspires.ftc.teamcode.data.BallType;
+
 import dev.nextftc.control.feedback.PIDCoefficients;
 import dev.nextftc.control.feedback.PIDController;
 import dev.nextftc.hardware.RobotController;
@@ -26,6 +28,8 @@ public class Launcher implements Mechanism {
     private final int KI = 0;
     private final int KD = 0;
     private final int TOLERANCE = 50;
+    private final int POLLEN_COMPRESS_POS = 0;
+    private final int NECTAR_COMPRESS_POS = 0;
     private AngularVelocity currentVelocity;
     private AngularVelocity targetVelocity;
     private final PIDController pid = new PIDController(new PIDCoefficients(KP, KI, KD));
@@ -76,11 +80,17 @@ public class Launcher implements Mechanism {
         return Math.abs(currentVelocity.getMagnitude() - targetVelocity.getMagnitude()) <= TOLERANCE;
     }
 
-    ColorProfile yellow = new ColorProfile(
-            ColorSpace.HSV,
-            NextColor.Companion.hsv(130f, 0.7f, 0.6f),
-            NextColor.Companion.hsv(20f, 0.3f, 1f)
-    );
+    public void pollenCompress(){
+        compressionServo.setPosition(POLLEN_COMPRESS_POS);
+    }
+
+    public void nectarCompress(){
+        compressionServo.setPosition(NECTAR_COMPRESS_POS);
+    }
+
+//    public Command moveGate(){
+//
+//    }
 
     @Override
     public void periodic() {
