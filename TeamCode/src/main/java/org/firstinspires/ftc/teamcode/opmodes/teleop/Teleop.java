@@ -37,6 +37,9 @@ public class Teleop extends NextOpMode {
         gp1.dpadLeft().onTrue(hazmatRobot.getLauncher().zeroLauncherGate());
         gp1.dpadUp().onTrue(hazmatRobot.getLauncher().incrementLauncherGate());
         gp1.dpadDown().onTrue(hazmatRobot.getLauncher().decrementLauncherGate());
+
+        gp1.cross().onTrue(hazmatRobot.getLauncher().incrementPower());
+        gp1.triangle().onTrue(hazmatRobot.getLauncher().decrementPower());
     }
 
     @Override

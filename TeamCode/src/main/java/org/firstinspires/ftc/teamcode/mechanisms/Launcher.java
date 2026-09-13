@@ -30,6 +30,7 @@ public class Launcher implements Mechanism {
 //    private final int TOLERANCE = 50;
     private final int POLLEN_COMPRESS_POS = 0;
     private final int NECTAR_COMPRESS_POS = 0;
+    private double currVel = 0.5;
 //    private AngularVelocity currentVelocity;
 //    private AngularVelocity targetVelocity;
 //    private final PIDController pid = new PIDController(new PIDCoefficients(KP, KI, KD));
@@ -49,7 +50,18 @@ public class Launcher implements Mechanism {
 
     @Deprecated
     public Command setPowerThingy() {
-        return instant(() -> launcherMotor.setThrottle(0.8));
+        currVel = 0.5;
+        return instant(() -> launcherMotor.setThrottle(0.5));
+    }
+
+    public Command incrementPower(){
+        currVel+=0.01;
+        return instant(() -> launcherMotor.setThrottle(currVel + 0.01));
+    }
+
+    public Command decrementPower(){
+        currVel-=0.01;
+        return instant(() -> launcherMotor.setThrottle(currVel - 0.01));
     }
 
     public Command incrementLauncherGate() {
