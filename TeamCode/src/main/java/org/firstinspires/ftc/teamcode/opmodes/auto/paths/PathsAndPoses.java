@@ -31,7 +31,7 @@ public class PathsAndPoses {
         return line(startPos, leavePos).linear(startPos, leavePos);
     }
 
-    public Path endPos_to_startPos(){
+    public Path leavePos_to_startPos(){
         return line(leavePos, startPos).linear(leavePos, startPos);
     }
 }
