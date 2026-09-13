@@ -42,9 +42,9 @@ public class Vision implements Mechanism {
             return null;
         }
 
-        double cameraPitch = 10;
+        double cameraPitch = 15;
         double ballHeight = 3;
-        double cameraHeight = 9.5;
+        double cameraHeight = 13.5;
 
         double cameraOffsetY = 7.5;
         double cameraOffsetX = 0;
@@ -97,7 +97,7 @@ public class Vision implements Mechanism {
         LLResultTypes.DetectorResult closestBall = null;
         double closestDistance = Double.MAX_VALUE;
 
-        double cameraPitch = 10;
+        double cameraPitch = 15;
         double ballHeight = 2.8;
         double cameraHeight = 13.5;
 

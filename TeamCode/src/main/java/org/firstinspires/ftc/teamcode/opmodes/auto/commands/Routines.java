@@ -32,10 +32,9 @@ public class Routines {
 
     public Command preloadAuto() {
         return sequential(
-                commands.runPath(paths.startPos_to_launchPos()),
-//                robot.launch(),
+                robot.launch(),
                 parallel(
-                        commands.runPath(paths.launchPos_to_endPos()),
+                        commands.runPath(paths.startPos_to_leavePos()),
                         robot.getIntake().setSpeed(Intake.IntakeState.FORWARD)
                 )
         );
@@ -45,8 +44,9 @@ public class Routines {
     public Command fullCycleAuto() {
         return sequential(
                 preloadAuto(),
+                commands.runPath(paths.endPos_to_startPos()),
+                robot.launch(),
                 commands.runPath(paths.endPos_to_startPos())
-//                robot.launch()
         );
     }
 

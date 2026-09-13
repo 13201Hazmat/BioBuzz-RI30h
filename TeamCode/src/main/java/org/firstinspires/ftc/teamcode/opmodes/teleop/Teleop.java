@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.opmodes.teleop;
 
 import static com.pedropathing.ivy.commands.Commands.instant;
 
+import static dev.nextftc.units.Units.RotationsPerMinute;
+
 import com.pedropathing.ivy.Scheduler;
 
 import org.firstinspires.ftc.teamcode.robot.HazmatRobot;
@@ -49,7 +51,7 @@ public class Teleop extends NextOpMode {
     @Override
     public void periodic() {
 //        telemetry.addData("Launcher Gate Servo Position", hazmatRobot.getLauncher().getServoPos());
-        telemetry.addData("Launcher Motor Power", hazmatRobot.getLauncher().getMotorSpeed());
+        telemetry.addData("Launcher Motor Power", hazmatRobot.getLauncher().getLauncherMotor().getEncoderVelocity().into(RotationsPerMinute));
         telemetry.addData("Intake state", hazmatRobot.getIntake().getSpeed());
 
         telemetry.update();
