@@ -22,12 +22,26 @@ public class PathsAndPoses {
     }
 
     // MAKE POSES HERE
-    public final Pose exampleStart = poseFactory.of(72, 0, 0);
-    public final Pose exampleEnd = poseFactory.of(72, 72, 0);
+    public final Pose startPos = poseFactory.of(82.5, 133, 270);
+    public final Pose leavePos = poseFactory.of(130, 127, 0);
+    // TODO ADD LAUNCH POS
+    public final Pose launchPos = poseFactory.of(0, 0, 0);
 
     // MAKE PATHS HERE
 
-    public Path exampleStart_to_exampleEnd(){
-        return line(exampleStart, exampleEnd).linear(exampleStart, exampleEnd);
+    public Path startPos_to_leavePos() {
+        return line(startPos, leavePos).linear(startPos, leavePos);
+    }
+
+    public Path startPos_to_launchPos() {
+        return line(startPos, launchPos).linear(startPos, launchPos);
+    }
+
+    public Path launchPos_to_endPos(){
+        return line(launchPos, leavePos).linear(launchPos, leavePos);
+    }
+
+    public Path endPos_to_startPos(){
+        return line(leavePos, startPos).linear(leavePos, startPos);
     }
 }

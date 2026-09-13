@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.mechanisms;
 
 import static dev.nextftc.units.Units.RotationsPerMinute;
-import static dev.nextftc.units.Units.RotationsPerSecond;
 
 import com.pedropathing.ivy.Command;
 
@@ -9,9 +8,7 @@ import org.firstinspires.ftc.teamcode.data.Config;
 
 import dev.nextftc.hardware.RobotController;
 import dev.nextftc.hardware.actuators.NextMotor;
-import dev.nextftc.hardware.sensors.NextColorDistanceSensor;
 import dev.nextftc.robot.Mechanism;
-import dev.nextftc.units.measuretypes.AngularVelocity;
 
 public class Launcher implements Mechanism {
     private final NextMotor launcherMotor = new NextMotor(RobotController.expansionHub(), Config.launcherMotor);
@@ -27,10 +24,11 @@ public class Launcher implements Mechanism {
     private double currentVelocity = 0.0;
     private double targetVelocity = 0.0;
 
-
-
-
     public Launcher(){}
+
+    public NextMotor getLauncherMotor(){
+        return launcherMotor;
+    }
 
     public void setTargetVelocity(double targetVelocity){
          launcherMotor.setVelocitySetpoint(RotationsPerMinute.of(targetVelocity));
@@ -43,11 +41,11 @@ public class Launcher implements Mechanism {
     public Command stopLauncher(){
         return instant(()-> launcherMotor.setVelocitySetpoint(RotationsPerMinute.of(0)));
     }
-    public Command incrementVelocity(){
+    public Command deltaUp(){
         return instant(()->launcherMotor.setVelocitySetpoint(RotationsPerMinute.of(currentVelocity + DELTA)));
     }
 
-    public Command decrementVelocity(){
+    public Command deltaDown(){
         return instant(()->launcherMotor.setVelocitySetpoint(RotationsPerMinute.of(currentVelocity - DELTA)));
     }
 

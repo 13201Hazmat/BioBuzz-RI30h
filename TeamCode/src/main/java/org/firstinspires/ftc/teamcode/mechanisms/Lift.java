@@ -64,7 +64,9 @@ public class Lift implements Mechanism {
         return Commands.instant(()-> setPos(l.getEncoderPosition().getMagnitude() + 50));
     }
 
-    public Command deltaDown(){return Commands.instant(()-> setPos(l.getEncoderPosition().getMagnitude() - 50));}
+    public Command deltaDown() {
+        return Commands.instant(() -> setPos(l.getEncoderPosition().getMagnitude() - 50));
+    }
 
 
     public String getPos() {

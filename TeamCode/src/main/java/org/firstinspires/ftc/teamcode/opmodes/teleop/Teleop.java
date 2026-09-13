@@ -35,11 +35,12 @@ public class Teleop extends NextOpMode {
         gp1.leftBumper().onTrue(instant(()->hazmatRobot.getIntake().cycle()));
         gp1.rightBumper().onTrue(hazmatRobot.launch());
 
-        gp2.dpadUp().onTrue(hazmatRobot.getLauncher().incrementPower());
-        gp2.dpadDown().onTrue(hazmatRobot.getLauncher().decrementPower());
-
-        gp2.circle().onTrue(hazmatRobot.getTransfer().open());
-        gp2.square().onTrue(hazmatRobot.getTransfer().close());
+        gp1.cross().onTrue(instant(() -> hazmatRobot.getLauncher().getLauncherMotor().setThrottle(1)));
+//        gp2.dpadUp().onTrue(hazmatRobot.getLauncher().incrementPower());
+//        gp2.dpadDown().onTrue(hazmatRobot.getLauncher().decrementPower());
+//
+//        gp2.circle().onTrue(hazmatRobot.getTransfer().open());
+//        gp2.square().onTrue(hazmatRobot.getTransfer().close());
 
     }
 
@@ -52,4 +53,7 @@ public class Teleop extends NextOpMode {
         telemetry.update();
     }
 
+    @Override
+    public void end() {
+    }
 }

@@ -39,5 +39,5 @@ dependencies {
 
     //Panels
 //    implementation("com.bylazar.sloth:fullpanels:0.3.0+1.0.12")
-
+//    implementation("com.acmerobotics.slothboard:dashboard:0.3.0+0.6.0")
 }
