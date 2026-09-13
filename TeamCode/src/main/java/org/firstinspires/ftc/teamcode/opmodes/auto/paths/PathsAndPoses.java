@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmodes.auto.paths;
 
 import static com.pedropathing.api.Paths.line;
+import static com.pedropathing.api.Paths.through;
 
 import com.pedropathing.api.PoseFactory;
 import com.pedropathing.math.Pose;
@@ -23,12 +24,12 @@ public class PathsAndPoses {
     }
 
     // MAKE POSES HERE
-    public final Pose startPos = poseFactory.of(82.5, 133, 270);
-    public final Pose leavePos = poseFactory.of(130, 127, 0);
+    public final Pose startPos = poseFactory.of(82.5, 8.5, 270);
+    public final Pose leavePos = poseFactory.of(82.5, 15, 270);
     // MAKE PATHS HERE
 
     public Path startPos_to_leavePos() {
-        return line(startPos, leavePos).linear(startPos, leavePos);
+        return through(startPos, leavePos).linear(startPos, leavePos);
     }
 
     public Path leavePos_to_startPos(){
