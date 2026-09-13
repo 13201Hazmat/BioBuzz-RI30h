@@ -32,7 +32,6 @@ public class Auto extends NextOpMode {
         commands = new AutoCommands(hazmatRobot.getFollower(), paths);
         routines = new Routines(hazmatRobot, paths, commands);
 
-        hazmatRobot.getFollower().setPose(paths.startPos);
     }
 
     @Override
@@ -60,6 +59,7 @@ public class Auto extends NextOpMode {
         else if(gamepad1.crossWasPressed()){
             selectedRoutine = routines.fullCycleAuto(hazmatRobot.getAlliance());
         }
+        hazmatRobot.getFollower().setPose(paths.startPos);
         schedule(selectedRoutine);
     }
 
